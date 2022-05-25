@@ -5,12 +5,12 @@ import { GameService } from './game.service';
 
 @ApiTags('games')
 @Controller('game')
-export classGameController {
+export class GameController {
 constructor(private gameService: GameService) {}
 
   @Get()
   findAll() {
-    return this.gamerService.findAll();
+    return this.gameService.findAll();
   }
 
   @Post()
