@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNumber, IsPositive, IsString } from 'class-validator';
+import {
+  IsInt,
+  IsNumber,
+  IsPositive,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 import internal from 'stream';
 
 export class CreateGameDto {
@@ -38,6 +45,8 @@ export class CreateGameDto {
     description: 'Nota do jogo no IMDB',
     example: '5',
   })
+  @Min(0)
+  @Max(5)
   imdbScore: number;
 
   @IsString()
