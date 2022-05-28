@@ -9,16 +9,19 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
-  .setTitle('XboxLive')
-  .setDescription('Aplicação para gestão dos jogos do Xboxlive')
-  .setVersion('1.0.0')
-  .addTag('status')
-  .addTag('game')
-  .build();
+    .setTitle('XboxLive')
+    .setDescription('Aplicação para gestão dos jogos do Xboxlive')
+    .setVersion('1.0.0')
+    .addTag('status')
+    .addTag('user')
+    .addTag('profile')
+    .addTag('game')
+    .addTag('genre')
 
-const document = SwaggerModule.createDocument(app, config);
-SwaggerModule.setup('api', app, document);
+    .build();
 
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3333);
 }

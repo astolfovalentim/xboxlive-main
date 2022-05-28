@@ -15,24 +15,33 @@ import { UpdateGameDto } from './dto/update-game.dto';
 import { Game } from './entities/game.entity';
 import { GameService } from './game.service';
 
-@ApiTags('games')
+@ApiTags('game')
 @Controller('game')
 export class GameController {
   constructor(private gameService: GameService) {}
 
+  @Post()
+  @ApiOperation({
+    summary: 'Criar novo jogo',
+  })
+  create(@Body() createGameDto: CreateGameDto) {
+    return this.gameService.create(createGameDto);
+  }
+
   @Get()
+  @ApiOperation({
+    summary: 'Listar todos os jogos',
+  })
   findAll() {
     return this.gameService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({
+    summary: 'Visualizar um jogo',
+  })
   findOne(@Param('id') id: string) {
     return this.gameService.findOne(id);
-  }
-
-  @Post()
-  create(@Body() createGameDto: CreateGameDto) {
-    return this.gameService.create(createGameDto);
   }
 
   @Patch(':id')
