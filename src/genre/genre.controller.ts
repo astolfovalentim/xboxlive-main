@@ -55,7 +55,7 @@ export class GenreController {
   @ApiOperation({
     summary: 'Remover um gênero pelo ID',
   })
-  remove(@Param('id') id: string) {
-    this.genreService.remove(id);
+  delete(@Param('id') id: string) {
+    this.genreService.delete(id);
   }
 }

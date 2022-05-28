@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
@@ -11,28 +15,48 @@ export class GenreService {
   create(createGenreDto: CreateGenreDto) {
     const data: Genre = { ...createGenreDto };
 
-    return this.prisma.genre.create({ data });
+    return this.prisma.genre.create({ data }).catch(this.handleError);
   }
 
   findAll() {
     return this.prisma.genre.findMany();
   }
 
-  async findOne(id: string) {
-    const record = await this.prisma.game.findUnique({ where: { id } });
+  async findById(id: string): Promise<Genre> {
+    const record = await this.prisma.genre.findUnique({ where: { id } });
 
     if (!record) {
-      throw new NotFoundException(`Registro com o id '${id}' não encontrado`);
+      throw new NotFoundException(`Registro com o ID '${id}' não encontrado`);
     }
 
     return record;
   }
 
-  update(id: string, updateGenreDto: UpdateGenreDto) {
-    return `This action updates a #${id} genre`;
+  async findOne(id: string) {
+    return this.findById(id);
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} genre`;
+  async update(id: string, dto: UpdateGenreDto): Promise<Genre> {
+    await this.findById(id);
+
+    const data: Partial<Genre> = { ...dto };
+    return this.prisma.genre
+      .update({
+        where: { id },
+        data,
+      })
+      .catch(this.handleError);
+  }
+  async delete(id: string) {
+    await this.findById(id);
+    await this.prisma.game.delete({ where: { id } });
+  }
+
+  handleError(error: Error): undefined {
+    const errorLines = error.message?.split('\n');
+    const lastErrorLine = errorLines[errorLines.length - 1]?.trim();
+    throw new UnprocessableEntityException(
+      lastErrorLine || 'Algum erro ocorreu ao executar a operação',
+    );
   }
 }
