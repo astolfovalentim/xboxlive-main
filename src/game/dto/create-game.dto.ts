@@ -1,12 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsInt,
-  IsNumber,
-  IsPositive,
-  IsString,
-  Max,
-  Min,
-} from 'class-validator';
+import { IsInt, IsString, Max, Min } from 'class-validator';
 import internal from 'stream';
 
 export class CreateGameDto {
@@ -63,11 +56,3 @@ export class CreateGameDto {
   })
   gameplayYouTubeUrl: string;
 }
-
-// Title              String
-//   CoverImageUrl      String
-//   Description        String
-//   Year               Int
-//   ImdbScore          Int
-//   TrailerYouTubeUrl  String
-//   GameplayYouTubeUrl String

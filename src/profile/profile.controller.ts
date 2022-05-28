@@ -55,7 +55,7 @@ export class ProfileController {
   @ApiOperation({
     summary: 'Remover um perfil pelo id',
   })
-  remove(@Param('id') id: string) {
-    this.profileService.remove(id);
+  delete(@Param('id') id: string) {
+    this.profileService.delete(id);
   }
 }
