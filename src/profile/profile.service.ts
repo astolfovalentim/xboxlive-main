@@ -28,16 +28,24 @@ export class ProfileService {
     return record;
   }
 
-  update(id: string, data: UpdateProfileDto): Promise<Profile> {
+  update(id: string, dto: UpdateProfileDto): Promise<Profile> {
+    const data: Partial<Profile> = { ...dto };
     return this.prisma.profile.update({
       where: { id },
-      data: {
-        ...data,
-      },
+      data,
     });
+
+    // update(id: string, data: UpdateProfileDto): Promise<Profile> {
+    //   return this.prisma.profile.update({
+    //     where: { id },
+    //     data: {
+    //       ...data,
+    //     },
+    //   });
+    // }
   }
 
-  delete(id: string) {
-    this.prisma.profile.delete({ where: { id } });
+  async delete(id: string) {
+    await this.prisma.profile.delete({ where: { id } });
   }
 }
