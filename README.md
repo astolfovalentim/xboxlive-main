@@ -32,6 +32,12 @@
 $ npm install
 ```
 
+## Clone
+
+```bash
+$ git clone https://github.com/astolfovalentim/xboxlive-mod4.git
+```
+
 ## Running the app
 
 ```bash
