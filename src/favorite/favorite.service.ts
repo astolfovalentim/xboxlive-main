@@ -12,13 +12,16 @@ export class FavoriteService {
     const data: Prisma.FavoriteCreateInput = {
       user: {
         connect: {
-          id: CreateFavoriteDto.userId,
+          id: createFavoriteDto.userId,
         },
       },
       profile: {
         connect: {
           title: createFavoriteDto.profileTitle,
         },
+      },
+      game: {
+        connect: createFavoriteDto.game.map((game) => ({ id: game })),
       },
     };
 
