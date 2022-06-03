@@ -45,15 +45,6 @@ export class ProfileService {
         data,
       })
       .catch(this.handleError);
-
-    // update(id: string, data: UpdateProfileDto): Promise<Profile> {
-    //   return this.prisma.profile.update({
-    //     where: { id },
-    //     data: {
-    //       ...data,
-    //     },
-    //   });
-    // }
   }
 
   async delete(id: string) {
