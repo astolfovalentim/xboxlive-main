@@ -33,7 +33,7 @@ export class CreateUserDto {
   @IsBoolean()
   @ApiProperty({
     description: 'O usuário é administrador?',
-    example: 's',
+    example: 'true',
   })
   isAdmin: boolean;
 }
