@@ -15,6 +15,7 @@ model User {
   cpf      String
   isAdmin  Boolean
 
+  profile Profile[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -24,6 +25,10 @@ model Profile {
   id       String @id @default(uuid())
   title    String @unique
   imageURL String
+
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -39,6 +44,9 @@ model Game {
   trailerYouTubeUrl  String
   gameplayYouTubeUrl String
 
+
+  genre Genre[]
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 }
@@ -47,6 +55,21 @@ model Genre {
   id   String @id @default(uuid())
   name String @unique
 
+
+  game Game[]
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+model Homepage {
+  id String @id @default(uuid())
+
+  // Jogos favoritos
+  //Sessao genero Jogos classificados por genero
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("homepage")
 }
