@@ -95,7 +95,7 @@ Requisitos
 
 
 
-> Clone esse projeto em seu computador com o comando:
+Clone esse projeto em seu computador com o comando:
  
 ```bash
 $ git clone https://github.com/astolfovalentim/xboxlive-mod4.git
@@ -103,15 +103,14 @@ $ git clone https://github.com/astolfovalentim/xboxlive-mod4.git
 
 > Acesse a pasta do projeto seu terminal:
 
-> 
-> ```bash
-> 	cd [Nome da pasta do seu projeto]
+```bash
+ 	cd [Nome da pasta do seu projeto]
 ```
 
 
 > Instalação - digite o seguinte comando:
 
-> ```bash
+```bash
 $ npm install
 ```
 
