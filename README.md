@@ -130,7 +130,6 @@ $ npm i -g @nestjs/cli
 
 
 ## Execução
->>>>>>> 16a7d46e246940989b41d5870d1c6ff0dbc8430a
 
 ```bash
 # development
@@ -143,18 +142,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Testes
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
 > A aplicação estará disponível para visualização em seu navegador, caso isso não aconteça automaticamente, abra o navegador no seguinte endereço: _localhost:3333_
 
 
