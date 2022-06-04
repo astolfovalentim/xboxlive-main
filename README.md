@@ -124,7 +124,7 @@ $ git clone https://github.com/astolfovalentim/xboxlive-mod4.git
 ## Running the app
 =======
 > Instalação -do NestJS CLI:
-> ```bash
+```bash
 $ npm i -g @nestjs/cli
 ```
 
