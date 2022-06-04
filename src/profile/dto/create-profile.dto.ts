@@ -20,7 +20,7 @@ export class CreateProfileDto {
   @IsUUID()
   @ApiProperty({
     description: 'ID do usuário que está criando o pedido',
-    example: 'e1bc0c89-a319-44df-a6e9-db66fe7b956b',
+    example: 'de45a5c7-979f-46e0-80cc-dc1ce7ea19bb',
   })
   userId: string;
 }

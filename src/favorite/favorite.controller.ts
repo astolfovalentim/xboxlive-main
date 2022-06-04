@@ -18,7 +18,7 @@ export class FavoriteController {
 
   @Get()
   @ApiOperation({
-    summary: 'Exibir todos os jogos favoritos',
+    summary: 'Lista de jogos favoritos',
   })
   findAll() {
     return this.favoriteService.findAll();
