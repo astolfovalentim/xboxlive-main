@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsString, Max, Min } from 'class-validator';
+import { IsInt, IsString, IsUUID, Max, Min } from 'class-validator';
 
 export class CreateGameDto {
   @IsString()
@@ -54,4 +54,14 @@ export class CreateGameDto {
     example: 'https://www.youtube.com/watch?v=SISarwWpQV8',
   })
   gameplayYouTubeUrl: string;
+
+  @IsUUID(undefined, { each: true })
+  @ApiProperty({
+    description: 'O id do gênero do jogo',
+    example:
+      '["205fa77d-9959-4fba-b6a9-ace085c92ff0", "6cae9057-38a5-4f6e-a436-3cfcd6524352"]',
+  })
+  genre: string[];
 }
+
+// criar campo no genero id e na entidade

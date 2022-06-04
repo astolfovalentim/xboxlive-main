@@ -36,7 +36,7 @@ export class GenreController {
 
   @Get(':id')
   @ApiOperation({
-    summary: 'Visualizar um jogo',
+    summary: 'Visualizar um gênero',
   })
   findOne(@Param('id') id: string) {
     return this.genreService.findOne(id);
