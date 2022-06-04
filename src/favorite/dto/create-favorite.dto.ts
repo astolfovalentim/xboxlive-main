@@ -1,10 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsUUID } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsString, ValidateNested } from 'class-validator';
+import { CreateFavoriteGameDto } from './create-favorite-game.dto';
 
 export class CreateFavoriteDto {
   @ApiProperty({
     description: 'Id do usuário está favoritando o jogo',
-    example: 'e1bc0c89-a319-44df-a6e9-db66fe7b956b',
+    example: 'de45a5c7-979f-46e0-80cc-dc1ce7ea19bb',
   })
   userId: string;
 
@@ -15,11 +17,13 @@ export class CreateFavoriteDto {
   })
   profileTitle: string;
 
-  @IsUUID(undefined, { each: true })
+  @ValidateNested({
+    each: true,
+  })
+  @Type(() => CreateFavoriteGameDto)
   @ApiProperty({
     description: 'Lista com os IDs dos jogos favoritos',
-    example:
-      '["04f66779-bcfa-4c5c-a140-f234138890f3", "adb96fd7-cdcf-43dc-9e1b-0c0a262111f9"]',
+    type: [CreateFavoriteGameDto],
   })
-  game: string[];
+  game: CreateFavoriteGameDto[];
 }

@@ -21,18 +21,207 @@ export class FavoriteService {
         },
       },
       game: {
-        connect: createFavoriteDto.game.map((game) => ({ id: game })),
+        createMany: {
+          data: createFavoriteDto.game.map((createFavoriteGameDto) => ({
+            gameId: createFavoriteGameDto.gameId,
+            title: createFavoriteGameDto.title,
+            description: createFavoriteGameDto.description,
+          })),
+        },
       },
     };
 
-    this.prisma.favorite.create({ data }).catch(handleError);
+    return this.prisma.favorite
+      .create({
+        data,
+        select: {
+          id: true,
+          profile: {
+            select: {
+              title: true,
+            },
+          },
+          user: {
+            select: {
+              name: true,
+            },
+          },
+          game: {
+            select: {
+              game: {
+                select: {
+                  title: true,
+                },
+              },
+            },
+          },
+        },
+      })
+      .catch(handleError);
   }
 
   findAll() {
-    return `This action returns all favorite`;
+    return this.prisma.favorite.findMany({
+      select: {
+        id: true,
+        profile: {
+          select: {
+            title: true,
+          },
+        },
+        user: {
+          select: {
+            name: true,
+          },
+        },
+        _count: {
+          select: {
+            game: true,
+          },
+        },
+      },
+    });
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} favorite`;
+    return this.prisma.favorite.findUnique({
+      where: { id },
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+        profile: {
+          select: {
+            title: true,
+          },
+        },
+        game: {
+          select: {
+            game: {
+              select: {
+                id: true,
+                title: true,
+                year: true,
+                coverImageUrl: true,
+                description: true,
+              },
+            },
+          },
+        },
+      },
+    });
   }
 }
+
+// @Injectable()
+// export class FavoriteService {
+//   constructor(private readonly prisma: PrismaService) {}
+
+//   create(createFavoriteDto: CreateFavoriteDto) {
+//     const data: Prisma.FavoriteCreateInput = {
+//       user: {
+//         connect: {
+//           id: createFavoriteDto.userId,
+//         },
+//       },
+//       profile: {
+//         connect: {
+//           title: createFavoriteDto.profileTitle,
+//         },
+//       },
+//       game: {
+//         createMany: {
+//           data: createFavoriteDto.game.map((createFavoriteGameDto) => ({
+//             gameId: createFavoriteGameDto.gameId,
+//             title: createFavoriteGameDto.title,
+//             description: createFavoriteGameDto.description,
+//           })),
+//         },
+//       },
+//     };
+//     //   connect: createFavoriteDto.game.map((gameId) => ({ id: gameId })),
+//     // },
+
+//     return this.prisma.favorite
+//       .create({
+//         data,
+//         select: {
+//           id: true,
+//           profile: {
+//             select: {
+//               title: true,
+//             },
+//           },
+//           user: {
+//             select: {
+//               name: true,
+//             },
+//           },
+//           game: {
+//             select: {
+//               title: true,
+//               description: true,
+//               // game: {
+//               //   select: {
+//               //     title: true,
+//               //   },
+//               // },
+//             },
+//           },
+//         },
+//       })
+//       .catch(handleError);
+//   }
+
+//   findAll() {
+//     return this.prisma.favorite.findMany({
+//       select: {
+//         id: true,
+//         profile: {
+//           select: {
+//             title: true,
+//           },
+//         },
+//         user: {
+//           select: {
+//             name: true,
+//           },
+//         },
+//         _count: {
+//           select: {
+//             game: true,
+//           },
+//         },
+//       },
+//     });
+//   }
+
+//   findOne(id: string) {
+//     return this.prisma.favorite.findUnique({
+//       where: { id },
+//       include: {
+//         user: {
+//           select: {
+//             name: true,
+//           },
+//         },
+//         profile: {
+//           select: {
+//             title: true,
+//           },
+//         },
+//         game: {
+//           select: {
+//             id: true,
+//             title: true,
+//             year: true,
+//             coverImageUrl: true,
+//             description: true,
+//           },
+//         },
+//       },
+//     });
+//   }
+// }

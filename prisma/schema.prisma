@@ -52,7 +52,7 @@ model Game {
 
   genre Genre[]
 
-  favorite Favorite[]
+  favorite FavoriteGame[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -79,11 +79,27 @@ model Favorite {
   profile   Profile @relation(fields: [profileId], references: [id])
   profileId String  @map("profile_id")
 
-  game Game[]
+  game FavoriteGame[]
 
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("Favorites")
+}
+
+model FavoriteGame {
+  id String @id @default(uuid())
+
+  favorite   Favorite @relation(fields: [favoriteId], references: [id])
+  favoriteId String   @map("favorite_id")
+
+  game   Game   @relation(fields: [gameId], references: [id])
+  gameId String @map("game_id")
+
+  title       String
+  description String
+
+  @@unique([favoriteId, gameId])
+  @@map("favorite_to_game")
 }
