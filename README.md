@@ -26,10 +26,7 @@
 
 O projeto é inspirado na Xbox Live, plataforma da Microsoft para o console de videogame Xbox.
 O objetivo é criar uma API backend com usuários, perfis, jogos e gêneros para que usuários possam se cadastrar, selecionar diferentes perfis (semelhante ao sistema de perfis da Netflix) e acessar os jogos disponíveis.
-
-> Exemplo:
->
-> Assim que o login for feito, a tela principal exibirá os jogos disponíveis, seguindo os exemplos a seguir. É possível favoritar os jogos, sendo que a lista de jogos favoritos é individual para cada perfil. Esses jogos irão compor a primeira sessão da página, sob o título de "Jogos Favoritos". Logo após essa seção, temos as seções dos outros jogos, classificados por gênero.
+Assim que o login for feito, a tela principal exibirá os jogos disponíveis, seguindo os exemplos a seguir. É possível favoritar os jogos, sendo que a lista de jogos favoritos é individual para cada perfil. Esses jogos irão compor a primeira sessão da página, sob o título de "Jogos Favoritos". Logo após essa seção, temos as seções dos outros jogos, classificados por gênero.
 
 ## Pré-requisitos
 Backend com a estrutura básica seguinte:
@@ -145,14 +142,6 @@ $ npm run start:prod
 
 > A aplicação estará disponível para visualização em seu navegador, caso isso não aconteça automaticamente, abra o navegador no seguinte endereço: _localhost:3333_
 
-
-## Links
-
-Mesmo que as informações possam estar sendo apresentadas no seu código, pode ocorrer de algumas pessoas não terem total entendimento sobre o que foi proposto ou determinados termos técnicos, você pode incluir um resumo dos links mais úteis para leitura dessas termos, por exemplo.
-
-> Exemplo: 
-> - [Guia de Markdown](https://docs.pipz.com/central-de-ajuda/learning-center/guia-basico-de-markdown#open)
-> - [Como formatar o Readme?](https://medium.com/@raullesteves/github-como-fazer-um-readme-md-bonit%C3%A3o-c85c8f154f8#:~:text=md%20%C3%A9%20um%20arquivo%20markdown,tags%20tamb%C3%A9m%20funcionam%2C%20veremos%20adiante.&text=Basta%20copiar%20o%20que%20o,e%20colar%20no%20README.md.)
 
 
 ## Autor
