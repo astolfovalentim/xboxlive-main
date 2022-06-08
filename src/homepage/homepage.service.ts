@@ -6,12 +6,16 @@ export class HomepageService {
   constructor(private readonly prisma: PrismaService) {}
 
   findOne(profileId: string) {
-    const profile = this.prisma.profile.findUnique({
+    const favorites = this.prisma.profile.findUnique({
       where: { id: profileId },
       select: {
         game: true,
       },
     });
-    return profile;
+    const genres = this.prisma.genre.findMany({
+      select: { name: true, id: true, game: { select: { title: true } } },
+    });
+    const favoritesGenres = [{favoritos: favorites}, {generos: genres}]
+    return favoritesGenres;
   }
 }

@@ -17,7 +17,8 @@ export class ProfileService {
           id: createProfileDto.userId,
         },
       },
-      ...createProfileDto,
+      title: createProfileDto.title,
+      imageURL: createProfileDto.imageURL,
       game: {
         connect: createProfileDto.game.map((gameId) => ({
           id: gameId,
@@ -25,7 +26,17 @@ export class ProfileService {
       },
     };
     return this.prisma.profile
-      .create({ data, select: { id: true, title: true } })
+      .create({
+        data,
+        select: {
+          id: true,
+          title: true,
+          imageURL: true,
+          user: { select: { id: true, name: true } },
+       game: {select: {id: true, title: true, coverImageUrl: true, genre: { select: {name: true}}}}
+
+        },
+      })
       .catch(handleError);
   }
 
