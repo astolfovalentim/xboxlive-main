@@ -5,17 +5,16 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class HomepageService {
   constructor(private readonly prisma: PrismaService) {}
 
-  findOne(profileId: string) {
-    const favorites = this.prisma.profile.findUnique({
+  async findOne(profileId: string) {
+    const favorites = await this.prisma.profile.findUnique({
       where: { id: profileId },
       select: {
         game: true,
       },
     });
-    const genres = this.prisma.genre.findMany({
+    const genres = await this.prisma.genre.findMany({
       select: { name: true, id: true, game: { select: { title: true } } },
     });
-    const favoritesGenres = [{favoritos: favorites}, {generos: genres}]
-    return favoritesGenres;
+    return [favorites, genres];
   }
 }
