@@ -19,8 +19,16 @@ export class CreateProfileDto {
 
   @IsUUID()
   @ApiProperty({
-    description: 'ID do usuário que está criando o pedido',
+    description: 'ID do usuário que está criando o perfil',
     example: 'de45a5c7-979f-46e0-80cc-dc1ce7ea19bb',
   })
   userId: string;
+
+  @IsUUID(undefined, { each: true })
+  @ApiProperty({
+    description: 'Lista de jogos favoritos',
+    example:
+      '["efd0bc4b-86d8-4229-b0f9-7e83100d5ed0","16547e6e-d8e9-4b85-9d88-b1ee32e1b83e"]',
+  })
+  game: string[];
 }

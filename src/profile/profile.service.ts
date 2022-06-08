@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { handleError } from 'src/utils/handle-error.util';
 import { CreateProfileDto } from './dto/create-profile.dto';
@@ -10,10 +11,19 @@ export class ProfileService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createProfileDto: CreateProfileDto) {
-    const data: Profile = {
+    const data: Prisma.ProfileCreateInput = {
+      user: {
+        connect: {
+          id: createProfileDto.userId,
+        },
+      },
       ...createProfileDto,
+      game: {
+        connect: createProfileDto.game.map((gameId) => ({
+          id: gameId,
+        })),
+      },
     };
-
     return this.prisma.profile
       .create({ data, select: { id: true, title: true } })
       .catch(handleError);
