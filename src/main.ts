@@ -13,11 +13,13 @@ async function bootstrap() {
     .setDescription('Aplicação para gestão dos jogos do Xboxlive')
     .setVersion('1.0.0')
     .addTag('status')
+    .addTag('auth')
     .addTag('user')
     .addTag('profile')
     .addTag('game')
     .addTag('genre')
     .addTag('Homepage')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

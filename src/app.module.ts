@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { ProfileModule } from './profile/profile.module';
 import { GenreModule } from './genre/genre.module';
 import { HomepageModule } from './homepage/homepage.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { HomepageModule } from './homepage/homepage.module';
     ProfileModule,
     GenreModule,
     HomepageModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
