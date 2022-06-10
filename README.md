@@ -93,7 +93,7 @@ Requisitos
 
 
 Clone esse projeto em seu computador com o comando:
- 
+
 ```bash
 $ git clone https://github.com/astolfovalentim/xboxlive-mod4.git
 ```
@@ -142,6 +142,17 @@ $ npm run start:prod
 
 > A aplicação estará disponível para visualização em seu navegador, caso isso não aconteça automaticamente, abra o navegador no seguinte endereço: _localhost:3333_
 
+## Swagger
+
+```bash
+http://localhost:3333/api
+```
+
+## PrismaStudio
+
+```bash
+http://localhost:5555/
+```
 
 
 ## Autor
@@ -149,6 +160,6 @@ $ npm run start:prod
 > - **Astolfo Valentim** - [Github](https://github.com/astolfovalentim)
 
 
-## Licença 
-> 
+## Licença
+>
 > MIT License (MIT)
