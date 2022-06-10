@@ -13,7 +13,7 @@ export class HomepageController {
 
   @Get(':profileId')
   @ApiOperation({
-    summary: 'Visualizar um jogo favorito pelo ID',
+    summary: 'Visualizar jogos favoritos pelo ID',
   })
   findOne(@Param('profileId') profileId: string) {
     return this.homepageService.findOne(profileId);
