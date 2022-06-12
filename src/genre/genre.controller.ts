@@ -15,6 +15,7 @@ import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { LoggedUser } from 'src/auth/logged-user.decorator';
 @ApiTags('genre')
 @UseGuards(AuthGuard())
 @ApiBearerAuth()
@@ -26,7 +27,7 @@ export class GenreController {
   @ApiOperation({
     summary: 'Criar um novo gênero',
   })
-  create(@Body() createGenreDto: CreateGenreDto) {
+  create(@LoggedUser() @Body() createGenreDto: CreateGenreDto) {
     return this.genreService.create(createGenreDto);
   }
 

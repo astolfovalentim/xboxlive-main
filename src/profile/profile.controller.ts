@@ -15,6 +15,8 @@ import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { LoggedUser } from 'src/auth/logged-user.decorator';
+import { User } from '@prisma/client';
 @ApiTags('profile')
 @UseGuards(AuthGuard())
 @ApiBearerAuth()
@@ -26,7 +28,7 @@ export class ProfileController {
   @ApiOperation({
     summary: 'Criar um novo perfil',
   })
-  create(@Body() createProfileDto: CreateProfileDto) {
+  create(@LoggedUser() @Body() createProfileDto: CreateProfileDto) {
     return this.profileService.create(createProfileDto);
   }
 
@@ -34,7 +36,7 @@ export class ProfileController {
   @ApiOperation({
     summary: 'Listar todos os perfis',
   })
-  findAll() {
+  findAll(@LoggedUser() user: User) {
     return this.profileService.findAll();
   }
 
@@ -42,7 +44,7 @@ export class ProfileController {
   @ApiOperation({
     summary: 'Visualizar um perfil',
   })
-  findOne(@Param('id') id: string) {
+  findOne(@LoggedUser() @Param('id') id: string) {
     return this.profileService.findOne(id);
   }
 
@@ -50,7 +52,7 @@ export class ProfileController {
   @ApiOperation({
     summary: 'Editar um perfil',
   })
-  update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
+  update(@LoggedUser() @Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
     return this.profileService.update(id, updateProfileDto);
   }
 
@@ -59,7 +61,7 @@ export class ProfileController {
   @ApiOperation({
     summary: 'Remover um perfil pelo id',
   })
-  delete(@Param('id') id: string) {
+  delete(@LoggedUser() @Param('id') id: string) {
     this.profileService.delete(id);
   }
 }
