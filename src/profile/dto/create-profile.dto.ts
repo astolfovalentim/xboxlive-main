@@ -17,13 +17,13 @@ export class CreateProfileDto {
   })
   imageURL: string;
 
-  
+
 
   @IsUUID(undefined, { each: true })
   @ApiProperty({
     description: 'Lista de jogos favoritos',
     example:
-      '["efd0bc4b-86d8-4229-b0f9-7e83100d5ed0","16547e6e-d8e9-4b85-9d88-b1ee32e1b83e"]',
+      '["4e221610-f5a1-49ba-a169-b41aae4bb7f3","9c1cce7e-a309-481a-8d32-2b07840e0b8b"]',
   })
   game: string[];
 }
