@@ -28,8 +28,8 @@ export class ProfileController {
   @ApiOperation({
     summary: 'Criar um novo perfil',
   })
-  create(@LoggedUser() @Body() createProfileDto: CreateProfileDto) {
-    return this.profileService.create(createProfileDto);
+  create(@LoggedUser() user: User, @Body() createProfileDto: CreateProfileDto) {
+    return this.profileService.create(createProfileDto, user.id);
   }
 
   @Get()
@@ -37,23 +37,23 @@ export class ProfileController {
     summary: 'Listar todos os perfis',
   })
   findAll(@LoggedUser() user: User) {
-    return this.profileService.findAll();
+    return this.profileService.findAll(user.id);
   }
 
   @Get(':id')
   @ApiOperation({
     summary: 'Visualizar um perfil',
   })
-  findOne(@LoggedUser() @Param('id') id: string) {
-    return this.profileService.findOne(id);
+  findOne(@LoggedUser() user: User, @Param('id') id: string) {
+    return this.profileService.findOne(id, user.id);
   }
 
   @Patch(':id')
   @ApiOperation({
     summary: 'Editar um perfil',
   })
-  update(@LoggedUser() @Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
-    return this.profileService.update(id, updateProfileDto);
+  update(@LoggedUser() user: User, @Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
+    return this.profileService.update(id, updateProfileDto, user.id);
   }
 
   @Delete(':id')
@@ -61,7 +61,7 @@ export class ProfileController {
   @ApiOperation({
     summary: 'Remover um perfil pelo id',
   })
-  delete(@LoggedUser() @Param('id') id: string) {
-    this.profileService.delete(id);
+  delete(@LoggedUser() user: User,  @Param('id') id: string) {
+    this.profileService.delete(id, user.id);
   }
 }

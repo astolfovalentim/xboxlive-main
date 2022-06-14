@@ -1,21 +1,14 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  HttpCode,
-  HttpStatus,
-  UseGuards,
+  Body, Controller, Delete, Get, HttpCode,
+  HttpStatus, Param, Patch, Post, UseGuards
 } from '@nestjs/common';
-import { GenreService } from './genre.service';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { LoggedValidAdmin } from 'src/auth/user-is-admin.decorator';
+import { User } from 'src/user/entities/user.entity';
 import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { LoggedUser } from 'src/auth/logged-user.decorator';
+import { GenreService } from './genre.service';
 @ApiTags('genre')
 @UseGuards(AuthGuard())
 @ApiBearerAuth()
@@ -27,7 +20,7 @@ export class GenreController {
   @ApiOperation({
     summary: 'Criar um novo gênero',
   })
-  create(@LoggedUser() @Body() createGenreDto: CreateGenreDto) {
+  create(@LoggedValidAdmin() user: User, @Body() createGenreDto: CreateGenreDto) {
     return this.genreService.create(createGenreDto);
   }
 
@@ -35,7 +28,7 @@ export class GenreController {
   @ApiOperation({
     summary: 'Listar todos os gêneros',
   })
-  findAll() {
+  findAll(@LoggedValidAdmin() user: User,) {
     return this.genreService.findAll();
   }
 
@@ -43,7 +36,7 @@ export class GenreController {
   @ApiOperation({
     summary: 'Visualizar um gênero',
   })
-  findOne(@Param('id') id: string) {
+  findOne(@LoggedValidAdmin() user: User, @Param('id') id: string) {
     return this.genreService.findOne(id);
   }
 
@@ -51,7 +44,7 @@ export class GenreController {
   @ApiOperation({
     summary: 'Editar um gênero pelo ID',
   })
-  update(@Param('id') id: string, @Body() updateGenreDto: UpdateGenreDto) {
+  update(@LoggedValidAdmin() user: User, @Param('id') id: string, @Body() updateGenreDto: UpdateGenreDto) {
     return this.genreService.update(id, updateGenreDto);
   }
 
@@ -60,7 +53,7 @@ export class GenreController {
   @ApiOperation({
     summary: 'Remover um gênero pelo ID',
   })
-  delete(@Param('id') id: string) {
+  delete(@LoggedValidAdmin() user: User, @Param('id') id: string) {
     this.genreService.delete(id);
   }
 }

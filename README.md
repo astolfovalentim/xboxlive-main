@@ -144,8 +144,10 @@ $ npm run start:prod
 
 ## Swagger
 
+Todas as rotas estão no swagger
+
 ```bash
-http://localhost:3333/api
+https://xboxlive-back.herokuapp.com/api/
 ```
 
 ## PrismaStudio

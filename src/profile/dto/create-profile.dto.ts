@@ -17,12 +17,7 @@ export class CreateProfileDto {
   })
   imageURL: string;
 
-  @IsUUID()
-  @ApiProperty({
-    description: 'ID do usuário que está criando o perfil',
-    example: 'de45a5c7-979f-46e0-80cc-dc1ce7ea19bb',
-  })
-  userId: string;
+  
 
   @IsUUID(undefined, { each: true })
   @ApiProperty({

@@ -15,6 +15,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { LoggedValidAdmin } from 'src/auth/user-is-admin.decorator';
+import { User } from './entities/user.entity';
 
 @ApiTags('user')
 @Controller('user')
@@ -35,7 +37,7 @@ export class UserController {
   })
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
-  findAll() {
+  findAll(@LoggedValidAdmin() user: User,) {
     return this.userService.findAll();
   }
 
@@ -45,7 +47,7 @@ export class UserController {
   })
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
-  findOne(@Param('id') id: string) {
+  findOne(@LoggedValidAdmin() user: User, @Param('id') id: string) {
     return this.userService.findOne(id);
   }
 
@@ -55,7 +57,7 @@ export class UserController {
   })
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(@LoggedValidAdmin() user: User, @Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
 
@@ -66,7 +68,7 @@ export class UserController {
   })
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
-  delete(@Param('id') id: string) {
+  delete(@LoggedValidAdmin() user: User, @Param('id') id: string) {
     this.userService.delete(id);
   }
 }

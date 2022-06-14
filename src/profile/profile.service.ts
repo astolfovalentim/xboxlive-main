@@ -10,11 +10,11 @@ import { Profile } from './entities/profile.entity';
 export class ProfileService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createProfileDto: CreateProfileDto) {
+  create(createProfileDto: CreateProfileDto, userid: string) {
     const data: Prisma.ProfileCreateInput = {
       user: {
         connect: {
-          id: createProfileDto.userId,
+          id: userid,
         },
       },
       title: createProfileDto.title,
@@ -40,8 +40,15 @@ export class ProfileService {
       .catch(handleError);
   }
 
-  findAll() {
-    return this.prisma.profile.findMany();
+  async findAll(userid: string) {
+    const profile = await this.prisma.user.findUnique({
+      where: {id: userid}, select: {profile: true}
+    })
+    if (profile.profile.length == 0) {
+      throw new NotFoundException('Nenhum perfil encontrado')
+
+    }
+    return profile
   }
 
   async findById(id: string): Promise<Profile> {
@@ -54,11 +61,11 @@ export class ProfileService {
     return record;
   }
 
-  async findOne(id: string) {
+  async findOne(id: string, userid: string) {
     return this.findById(id);
   }
 
-  async update(id: string, dto: UpdateProfileDto): Promise<Profile> {
+  async update(id: string, dto: UpdateProfileDto, userid: string): Promise<Profile> {
     await this.findById(id);
     const data: Partial<Profile> = { ...dto };
     return this.prisma.profile
@@ -69,7 +76,7 @@ export class ProfileService {
       .catch(handleError);
   }
 
-  async delete(id: string) {
+  async delete(id: string, userid: string) {
     await this.findById(id);
     await this.prisma.profile.delete({ where: { id } });
   }

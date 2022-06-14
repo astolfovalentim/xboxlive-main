@@ -12,7 +12,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('XboxLive')
-    .setDescription('Aplicação para gestão dos jogos do Xboxlive')
+    .setDescription('Aplicação para gestão dos jogos do Xboxlive. Você pode criar seu usuário e compartilhar sua conta com perfis diversos. Cada perfil gera sua lista de jogos favoritos. Somente administradores pode inserir novos jogos e criar novos gêneros.')
     .setVersion('1.0.0')
     .addTag('status')
     .addTag('auth')
