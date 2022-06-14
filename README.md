@@ -92,10 +92,10 @@ Requisitos
 
 
 
-Clone esse projeto em seu computador com o comando:
+Link da branch do projeto no github
 
 ```bash
-$ git clone https://github.com/astolfovalentim/xboxlive-mod4.git
+https://github.com/astolfovalentim/xboxlive-mod4.git](https://github.com/astolfovalentim/xboxlive-mod4/tree/quarta-semana)
 ```
 
 > Acesse a pasta do projeto seu terminal:
