@@ -95,7 +95,7 @@ Requisitos
 Link da branch do projeto no github
 
 ```bash
-https://github.com/astolfovalentim/xboxlive-mod4.git](https://github.com/astolfovalentim/xboxlive-mod4/tree/quarta-semana)
+https://github.com/astolfovalentim/xboxlive-mod4.git
 ```
 
 > Acesse a pasta do projeto seu terminal:
