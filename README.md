@@ -71,8 +71,9 @@ Requisitos
 
 
 
-> Clone esse projeto em seu computador com o comando:
-> ```bash
+Clone esse projeto em seu computador com o comando:
+
+```bash
 $ git clone https://github.com/astolfovalentim/xboxlive-mod4.git
 ```
 
